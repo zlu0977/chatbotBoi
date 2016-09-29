@@ -19,7 +19,7 @@ public class RouseBook implements Chatbot{
 			ZhengMain.promptForever();
 		}
 	}
-
+ 
 	public boolean isTriggered(String userInput) {
 		for(int i = 0; i < keywords.length; i++){
 			if(ZhengMain.findKeyword(userInput, keywords[i], 0) >= 0){
