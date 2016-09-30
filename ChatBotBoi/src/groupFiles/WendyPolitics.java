@@ -24,6 +24,6 @@ public class WendyPolitics implements Chatbot {
 			}
 		}
 		return false;
-	}
+	} 
 
 }
