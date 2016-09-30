@@ -6,6 +6,7 @@ public class ZhengMusic implements Chatbot {
 	
 	public void talk() {
 		inMusicLoop = true;
+		musicResponse = ZhengMain.response;
 		while(inMusicLoop)
 		{
 			printResponse();
@@ -46,7 +47,7 @@ public class ZhengMusic implements Chatbot {
 		for(int i = 0; i < questionList.length; i ++)
 		{
 			int questionLength = questionList[i].length();
-			if(userInput.substring(0, questionLength + 1).equals(questionList[i]))
+			if(userInput.substring(0, questionLength).equals(questionList[i]))
 				return true;
 		}
 		return false;
