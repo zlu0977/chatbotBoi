@@ -34,13 +34,13 @@ public class ZhengMusic implements Chatbot {
 	private void printResponse()
 	{
 		if(ZhengMain.findKeyword(musicResponse, "music", 0) >= 0)
-			if(isQuestion(musicResponse))
+			if(isQuestion(musicResponse) >= 0)
 				ZhengMain.syso("this is a question about music");
 			else
 				ZhengMain.syso("this is not a question");
 	}
 	
-	private boolean isQuestion(String userInput)
+	private int isQuestion(String userInput)
 	{
 		String[] questionList = {"what", "where", "when", "why", "which", "how", "is", "should", "could", "would", "can", "will", "do", "does", "shall", "was"};
 		
@@ -48,9 +48,9 @@ public class ZhengMusic implements Chatbot {
 		{
 			int questionLength = questionList[i].length();
 			if(userInput.substring(0, questionLength).equals(questionList[i]))
-				return true;
+				return i;
 		}
-		return false;
+		return -1;
 	}
 
 }
