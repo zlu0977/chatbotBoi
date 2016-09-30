@@ -8,7 +8,7 @@ public class ZhengMusic implements Chatbot {
 		inMusicLoop = true;
 		while(inMusicLoop)
 		{
-			//printResponse();
+			printResponse();
 			musicResponse = ZhengMain.promptInput();
 			
 			if(!isTriggered(musicResponse))
@@ -30,12 +30,26 @@ public class ZhengMusic implements Chatbot {
 		return false;
 	}
 	
-	/*private void printResponse()
+	private void printResponse()
 	{
 		if(ZhengMain.findKeyword(musicResponse, "music", 0) >= 0)
+			if(isQuestion(musicResponse))
+				ZhengMain.syso("this is a question about music");
+			else
+				ZhengMain.syso("this is not a question");
+	}
+	
+	private boolean isQuestion(String userInput)
+	{
+		String[] questionList = {"what", "where", "when", "why", "which", "how", "is", "should", "could", "would", "can", "will", "do", "does", "shall", "was"};
+		
+		for(int i = 0; i < questionList.length; i ++)
 		{
-			
+			int questionLength = questionList[i].length();
+			if(userInput.substring(0, questionLength + 1).equals(questionList[i]))
+				return true;
 		}
-	}*/
+		return false;
+	}
 
 }
