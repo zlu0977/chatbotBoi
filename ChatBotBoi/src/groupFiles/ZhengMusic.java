@@ -1,9 +1,21 @@
 package groupFiles;
 
 public class ZhengMusic implements Chatbot {
-
+	private boolean inMusicLoop;
+	
 	public void talk() {
-		
+		inMusicLoop = true;
+		while(inMusicLoop)
+		{
+			printResponse();
+			helloResponse = ZhengMain.promptInput();
+			
+			if(!isTriggered(helloResponse))
+			{
+				inMusicLoop = false;
+				ZhengMain.promptForever();
+			}
+		}
 
 	}
   
@@ -15,6 +27,11 @@ public class ZhengMusic implements Chatbot {
 				return true;
 		
 		return false;
+	}
+	
+	private void printResponse()
+	{
+		ZhengMain.syso("I like music too");
 	}
 
 }
