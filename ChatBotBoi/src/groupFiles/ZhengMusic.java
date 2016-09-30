@@ -21,7 +21,7 @@ public class ZhengMusic implements Chatbot {
 	}
   
 	public boolean isTriggered(String userInput) {
-		String[] triggers = {"music", "lyric", "lyrics", "song", "songs"};
+		String[] triggers = {"music", "lyric", "lyrics", "song", "songs", "classical", "classic", "pop", "rock", "jazz", "kpop", "jpop", "salsa", "bachata", "metal", "techno", "hip hop", "rap"};
 		
 		for(int i = 0; i < triggers.length; i ++)
 			if(ZhengMain.findKeyword(userInput, triggers[i], 0) >= 0)
@@ -32,7 +32,10 @@ public class ZhengMusic implements Chatbot {
 	
 	private void printResponse()
 	{
-		ZhengMain.syso("I like music too");
+		if(ZhengMain.findKeyword(musicResponse, "music", 0) >= 0)
+		{
+			
+		}
 	}
 
 }

@@ -10,12 +10,12 @@ public class ZhengMain {
 	
 	//Add chatbots below
 	//static Chatbot school = new ZhengSchool();
-	static Chatbot politics = new WendyPolitics();
+	static Chatbot movies = new WendyMovies();
 	static Chatbot music = new ZhengMusic();
 	
 	
 	public static void main(String[] args) {
-		politics.talk();
+		movies.talk();
 		music.talk();
 		
 		promptForever();
