@@ -20,7 +20,7 @@ public class WendyMath implements Chatbot {
 				inMathLoop = false;
 				ZhengMain.promptForever();
 			}
-		}
+		} 
 	}
 
 	private void printResponses() {

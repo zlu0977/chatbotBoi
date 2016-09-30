@@ -21,7 +21,7 @@ public class WendyPolitics implements Chatbot {
 				ZhengMain.promptForever();
 			}
 		}
-	}
+	} 
 
 	private void printResponse() {
 		// TODO Auto-generated method stub
