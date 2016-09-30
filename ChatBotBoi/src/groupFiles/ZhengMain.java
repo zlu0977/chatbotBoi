@@ -4,21 +4,29 @@ import java.util.Scanner;
 
 public class ZhengMain {
 	static String response;
-	static Scanner input = new Scanner(System.in);
+	static Scanner input;
 	static String user;
 	static boolean inMainLoop;
 	
 	//Add chatbots below
 	//static Chatbot school = new ZhengSchool();
-	static Chatbot movies = new WendyMovies();
-	static Chatbot music = new ZhengMusic();
+	static Chatbot movies;
+	static Chatbot music;
 	
 	
 	public static void main(String[] args) {
+		createFields();
 		movies.talk();
 		music.talk();
 		
 		promptForever();
+	}
+	
+	public static void createFields()
+	{
+		input = new Scanner(System.in);
+		movies = new WendyMovies();
+		music = new ZhengMusic();
 	}
 	
 	public static String promptInput()
