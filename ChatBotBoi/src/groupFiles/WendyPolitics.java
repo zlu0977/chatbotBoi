@@ -5,7 +5,7 @@ public class WendyPolitics implements Chatbot {
 	
 	private String politicResponse;
 	private boolean inPoliticsLoop;
-	String[] responses = {"No, we don't talk about polticis here","I don't like politics. Let's not talk about it", "Nope, talk to the hand"};
+	String[] responses = {"No, we don't talk about poltics here","I don't like politics. Let's not talk about it", "Nope, talk to the hand"};
 
 	@Override
 	public void talk() {
