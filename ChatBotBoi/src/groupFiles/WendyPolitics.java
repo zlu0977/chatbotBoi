@@ -15,7 +15,14 @@ public class WendyPolitics implements Chatbot {
 	@Override
 	public boolean isTriggered(String userInput) {
 		// TODO Auto-generated method stub
-		String[] Trigger = {"Hilary","Clinton","Donald","Trump","Election","Vote","President","Barack","Obama","Politics"};
+		String[] trigger = {"Hilary","Clinton","Donald","Trump","Election","Vote","President","Barack","Obama","Politics"};
+		for(int i = 0; i< trigger.length; i++)
+		{
+			if (ZhengMain.findKeyword(userInput, trigger[i], 0) > 0)
+			{
+				return true;
+			}
+		}
 		return false;
 	}
 
