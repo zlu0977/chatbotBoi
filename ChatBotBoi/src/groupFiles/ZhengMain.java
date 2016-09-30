@@ -12,7 +12,7 @@ public class ZhengMain {
 	//static Chatbot school = new ZhengSchool();
 	
 	public static void main(String[] args) {
-		syso("" + findKeyword("hello i am not GOOD. hi good", "good", 0));
+		promptForever();
 	}
 	
 	public static String promptInput()
