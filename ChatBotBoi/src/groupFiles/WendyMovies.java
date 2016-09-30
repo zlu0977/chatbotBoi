@@ -73,7 +73,7 @@ public class WendyMovies implements Chatbot{
 		String[] trigger = {"movie","Finding Dory", "Ice Age", "Dory", "Nemo",};
 		for (int i = 0; i<trigger.length; i++)
 		{
-			if(ZhengMain.findKeyword(userInput, trigger[i], 0) > 0)
+			if(ZhengMain.findKeyword(userInput, trigger[i], 0) >= 0)
 			{
 				return true;
 			}
