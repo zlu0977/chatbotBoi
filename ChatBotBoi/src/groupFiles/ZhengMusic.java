@@ -8,7 +8,7 @@ public class ZhengMusic implements Chatbot {
 		inMusicLoop = true;
 		while(inMusicLoop)
 		{
-			printResponse();
+			//printResponse();
 			musicResponse = ZhengMain.promptInput();
 			
 			if(!isTriggered(musicResponse))
@@ -30,12 +30,12 @@ public class ZhengMusic implements Chatbot {
 		return false;
 	}
 	
-	private void printResponse()
+	/*private void printResponse()
 	{
 		if(ZhengMain.findKeyword(musicResponse, "music", 0) >= 0)
 		{
 			
 		}
-	}
+	}*/
 
 }

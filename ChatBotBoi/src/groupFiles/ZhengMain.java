@@ -12,12 +12,10 @@ public class ZhengMain {
 	//static Chatbot school = new ZhengSchool();
 	static Chatbot movies;
 	static Chatbot music;
-	
+	static Chatbot books;
 	
 	public static void main(String[] args) {
 		createFields();
-		movies.talk();
-		music.talk();
 		
 		promptForever();
 	}
@@ -44,15 +42,21 @@ public class ZhengMain {
 			response = promptInput();
 			
 			if(findKeyword(response, "good", 0) >= 0)
-				System.out.println("Thats wonderful.");
-			/*else if(school.isTriggered(response) >= 0)
+				syso("Thats wonderful.");
+			else if(music.isTriggered(response))
 			{
-				System.out.println("school. is cool like a pool filled with drool");
+				syso("I like music too.");
 				inMainLoop = false;
-				school.talk();
+				music.talk();
+			}
+			else if(movies.isTriggered(response))
+			{
+				syso("I like movies too.");
+				inMainLoop = false;
+				movies.talk();
 			}
 			else
-				System.out.println("idk");*/
+				syso("I dont understand");
 		}
 	}
 	
