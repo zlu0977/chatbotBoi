@@ -10,9 +10,15 @@ public class ZhengMain {
 	
 	//Add chatbots below
 	//static Chatbot school = new ZhengSchool();
+	static Chatbot politics = new WendyPolitics();
+	static Chatbot music = new ZhengMusic();
+	
 	
 	public static void main(String[] args) {
-		syso("" + findKeyword("hello i am not GOOD. hi good", "good", 0));
+		politics.talk();
+		music.talk();
+		
+		promptForever();
 	}
 	
 	public static String promptInput()
