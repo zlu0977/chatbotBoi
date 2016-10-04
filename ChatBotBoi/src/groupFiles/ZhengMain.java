@@ -9,7 +9,6 @@ public class ZhengMain {
 	static boolean inMainLoop;
 	
 	//Add chatbots below
-	//static Chatbot school = new ZhengSchool();
 	static Chatbot movies;
 	static Chatbot music;
 	static Chatbot books;
@@ -21,7 +20,7 @@ public class ZhengMain {
 	}
 	
 	public static void createFields()
-	{
+	{	
 		input = new Scanner(System.in);
 		movies = new WendyMovies();
 		music = new ZhengMusic();
@@ -36,13 +35,16 @@ public class ZhengMain {
 	public static void promptForever()
 	{	
 		inMainLoop = true;
+		System.out.println("Hi, how are you?");
 		while(inMainLoop)
 		{
-			System.out.println("Hi, how are you?");
 			response = promptInput();
 			
 			if(findKeyword(response, "good", 0) >= 0)
+			{
 				syso("Thats wonderful.");
+				syso("What do you want to talk about?");
+			}
 			else if(music.isTriggered(response))
 			{
 				syso("I like music too.");
@@ -56,7 +58,7 @@ public class ZhengMain {
 				movies.talk();
 			}
 			else
-				syso("I dont understand");
+				syso(getLastResponse());
 		}
 	}
 	
@@ -109,7 +111,26 @@ public class ZhengMain {
 		return false;*/
 		
 	}
-
+	
+	public static int isQuestion(String userInput)
+	{
+		String[] questionList = {"what", "where", "when", "why", "which", "how", "is", "should", "could", "would", "can", "will", "do", "does", "shall", "was"};
+		
+		for(int i = 0; i < questionList.length; i ++)
+		{
+			int questionLength = questionList[i].length();
+			if(userInput.substring(0, questionLength).equals(questionList[i]))
+				return i;
+		}
+		return -1;
+	}
+	
+	public static String getLastResponse()
+	{
+		String[] responses = {"I see...", "Wow. I never knew.", "Thats nice.", "I dont get it."};
+		return responses[(int) (Math.random() * responses.length)];
+	}
+	
 	public static void syso(String string)
 	{
 		System.out.println(string);
