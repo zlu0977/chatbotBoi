@@ -133,8 +133,8 @@ public class ZhengMain {
 
         public static String getRandomQuestion()
         {
-                STRING[] questions = {""};
-                Return questions[(int) (Math.random() * questions.length)];
+                String[] questions = {""};
+                return questions[(int) (Math.random() * questions.length)];
         }
 
 	public static void syso(String string)

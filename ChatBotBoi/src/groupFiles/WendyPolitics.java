@@ -11,7 +11,7 @@ public class WendyPolitics implements Chatbot {
 	public void talk() {
 		// TODO Auto-generated method stub
 		inPoliticsLoop = true;
-		
+		politicResponse = ZhengMain.response;
 		while (inPoliticsLoop)
 		{
 			printResponse();

@@ -10,7 +10,7 @@ public class WendyMath implements Chatbot {
 	public void talk() {
 		// TODO Auto-generated method stub
 		inMathLoop = true;
-		
+		mathResponse = ZhengMain.response;
 		while (inMathLoop)
 		{
 			printResponses();

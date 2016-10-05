@@ -4,6 +4,8 @@ public class WendyMovies implements Chatbot{
 	
 	private String movieTalk;
 	private boolean inMovieLoop;
+	private boolean inIceAgeTalk = false;
+	private boolean talk;
 	
 	String[] movies = {"Ice Age"};
 	String[] badResponses = {"I hate that movie","I don't want to talk about that movie"};
@@ -14,10 +16,11 @@ public class WendyMovies implements Chatbot{
 	public void talk() {
 		// TODO Auto-generated method stub
 		inMovieLoop = true; 
+		movieTalk = ZhengMain.response;
 		while(inMovieLoop)
 		{
 			printResponse(movieTalk);
-			
+			movieTalk = ZhengMain.promptInput();
 			if(!isTriggered(movieTalk))
 			{
 				inMovieLoop = false;
@@ -32,11 +35,16 @@ public class WendyMovies implements Chatbot{
 		timesAsk = 1;
 		String[] good = {"love","like","favorite"};
 		
-		if(ZhengMain.findKeyword(userInput, movies[1], 0) > 0)
+		if(ZhengMain.findKeyword(userInput, "movies", 0) >= 0 || ZhengMain.findKeyword(userInput, "movie", 0) >= 0)
 		{
+			ZhengMain.syso("What is your favorite movie?");
+		}
+		else if(ZhengMain.findKeyword(userInput, "ice age", 0) >= 0 || inIceAgeTalk)
+		{
+			inIceAgeTalk = true;
 			talkIceAge(userInput);
 		}
-		else 
+		else
 		{	
 			timesAsk++;
 			talkBad();
@@ -46,19 +54,20 @@ public class WendyMovies implements Chatbot{
 
 	private void talkIceAge(String userInput) {
 		// TODO Auto-generated method stub
-		ZhengMain.syso("Really? That's my number " + timesAsk + "favorite movie too!");
+		ZhengMain.syso("Really? That's my number " + timesAsk + " favorite movie too!");
 		String[] iceAgeChars = {"Manny","Sid","Diego"};
 		ZhengMain.syso("Who's your favorite characters?");
 
-		if(ZhengMain.findKeyword(userInput, "Manny", 0) > 0)
+
+		if(ZhengMain.findKeyword(userInput, "Manny", 0) >= 0)
 		{
 			talkManny();
 		}
-		else if(ZhengMain.findKeyword(userInput, "Sid", 0) > 0)
+		else if(ZhengMain.findKeyword(userInput, "Sid", 0) >= 0)
 		{
 			talkSid();
 		}
-		else if(ZhengMain.findKeyword(userInput, "Diego", 0) > 0)
+		else if(ZhengMain.findKeyword(userInput, "Diego", 0) >= 0)
 		{
 			talkDiego();
 		}
@@ -110,7 +119,7 @@ public class WendyMovies implements Chatbot{
 	@Override
 	public boolean isTriggered(String userInput) {
 		// TODO Auto-generated method stub
-		String[] trigger = {"movie","Ice Age","Manny","Sid","diego","continental","drift","Ellie","peaches","Granny"};
+		String[] trigger = {"movie","Ice Age","Manny","Sid","diego","continental","drift","Ellie","peaches","Granny","movies"};
 		for (int i = 0; i<trigger.length; i++)
 		{
 			if(ZhengMain.findKeyword(userInput, trigger[i], 0) >= 0)
