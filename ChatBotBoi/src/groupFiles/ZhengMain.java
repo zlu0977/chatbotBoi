@@ -130,7 +130,13 @@ public class ZhengMain {
 		String[] responses = {"I see...", "Wow. I never knew.", "Thats nice.", "I dont get it."};
 		return responses[(int) (Math.random() * responses.length)];
 	}
-	
+
+        public static String getRandomQuestion()
+        {
+                STRING[] questions = {""};
+                Return questions[(int) (Math.random() * questions.length)];
+        }
+
 	public static void syso(String string)
 	{
 		System.out.println(string);
