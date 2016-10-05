@@ -57,7 +57,7 @@ public class WendyMovies implements Chatbot{
 		ZhengMain.syso("Really? That's my number " + timesAsk + " favorite movie too!");
 		String[] iceAgeChars = {"Manny","Sid","Diego"};
 		ZhengMain.syso("Who's your favorite characters?");
-
+ 
 
 		if(ZhengMain.findKeyword(userInput, "Manny", 0) >= 0)
 		{

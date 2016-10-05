@@ -58,7 +58,7 @@ public class ZhengMain {
 				movies.talk();
 			}
 			else
-				syso(getLastResponse());
+				syso(getLastResponse()); 
 		}
 	}
 	

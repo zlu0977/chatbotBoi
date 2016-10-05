@@ -27,7 +27,7 @@ public class WendyMath implements Chatbot {
 		// TODO Auto-generated method stub
 		int math = (int)(Math.random() * responses.length); 
 		ZhengMain.syso(responses[math]);
-	}
+	} 
 
 	@Override
 	public boolean isTriggered(String userInput) {

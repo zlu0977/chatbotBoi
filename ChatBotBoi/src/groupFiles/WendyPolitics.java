@@ -19,7 +19,7 @@ public class WendyPolitics implements Chatbot {
 			{
 				inPoliticsLoop = false;
 				ZhengMain.promptForever();
-			}
+			} 
 		}
 	} 
 
