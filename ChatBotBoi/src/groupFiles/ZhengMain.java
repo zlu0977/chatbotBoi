@@ -4,15 +4,26 @@ import java.util.Scanner;
 
 public class ZhengMain {
 	static String response;
-	static Scanner input = new Scanner(System.in);
+	static Scanner input;
 	static String user;
 	static boolean inMainLoop;
 	
 	//Add chatbots below
-	//static Chatbot school = new ZhengSchool();
+	static Chatbot movies;
+	static Chatbot music;
+	static Chatbot books;
 	
 	public static void main(String[] args) {
-		syso("" + findKeyword("hello i am not GOOD. hi good", "good", 0));
+		createFields();
+		
+		promptForever();
+	}
+	
+	public static void createFields()
+	{	
+		input = new Scanner(System.in);
+		movies = new WendyMovies();
+		music = new ZhengMusic();
 	}
 	
 	public static String promptInput()
@@ -24,21 +35,30 @@ public class ZhengMain {
 	public static void promptForever()
 	{	
 		inMainLoop = true;
+		System.out.println("Hi, how are you?");
 		while(inMainLoop)
 		{
-			System.out.println("Hi, how are you?");
 			response = promptInput();
 			
 			if(findKeyword(response, "good", 0) >= 0)
-				System.out.println("Thats wonderful.");
-			/*else if(school.isTriggered(response) >= 0)
 			{
-				System.out.println("school. is cool like a pool filled with drool");
+				syso("Thats wonderful.");
+				syso("What do you want to talk about?");
+			}
+			else if(music.isTriggered(response))
+			{
+				syso("I like music too.");
 				inMainLoop = false;
-				school.talk();
+				music.talk();
+			}
+			else if(movies.isTriggered(response))
+			{
+				syso("I like movies too.");
+				inMainLoop = false;
+				movies.talk();
 			}
 			else
-				System.out.println("idk");*/
+				syso(getLastResponse());
 		}
 	}
 	
@@ -91,6 +111,31 @@ public class ZhengMain {
 		return false;*/
 		
 	}
+	
+	public static int isQuestion(String userInput)
+	{
+		String[] questionList = {"what", "where", "when", "why", "which", "how", "is", "should", "could", "would", "can", "will", "do", "does", "shall", "was"};
+		
+		for(int i = 0; i < questionList.length; i ++)
+		{
+			int questionLength = questionList[i].length();
+			if(userInput.substring(0, questionLength).equals(questionList[i]))
+				return i;
+		}
+		return -1;
+	}
+	
+	public static String getLastResponse()
+	{
+		String[] responses = {"I see...", "Wow. I never knew.", "Thats nice.", "I dont get it."};
+		return responses[(int) (Math.random() * responses.length)];
+	}
+
+        public static String getRandomQuestion()
+        {
+                STRING[] questions = {""};
+                Return questions[(int) (Math.random() * questions.length)];
+        }
 
 	public static void syso(String string)
 	{
