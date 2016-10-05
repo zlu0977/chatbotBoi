@@ -13,7 +13,7 @@ public class WendyMovies implements Chatbot{
 	@Override
 	public void talk() {
 		// TODO Auto-generated method stub
-		inMovieLoop = true;
+		inMovieLoop = true; 
 		while(inMovieLoop)
 		{
 			printResponse(movieTalk);
