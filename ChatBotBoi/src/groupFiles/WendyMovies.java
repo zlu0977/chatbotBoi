@@ -6,7 +6,7 @@ public class WendyMovies implements Chatbot{
 	private boolean inMovieLoop;
 	private int timesAsk = 1;
 	private int movieLayers;
-	String[] good = {"love","like","favorite"};
+	String[] bad = {"hate","dislike","don't like"};
 	
 	String[] movies = {"Ice Age"};
 	String[] badResponses = {"I hate that movie","I don't want to talk about that movie","interesting taste, but sorry not my type","don't like it"};
@@ -82,15 +82,15 @@ public class WendyMovies implements Chatbot{
 	private void talkManny(String userInput) {
 		// TODO Auto-generated method stub
 		
-		if(ZhengMain.wordMatch(userInput, good))
+		if(ZhengMain.wordMatch(userInput, bad ))
+		{	
+			ZhengMain.syso("rude");
+		}
+		else
 		{
 			String[] mannyResponses = {"Did you know he's a wooly mammoth?","Isn't he poofy?"};
 			int num = (int) (Math.random() * mannyResponses.length);
 			ZhengMain.syso(mannyResponses[num]);
-		}
-		else
-		{
-			ZhengMain.syso("rude");
 		}
 		
 		
@@ -98,30 +98,30 @@ public class WendyMovies implements Chatbot{
 
 	private void talkSid(String userInput) {
 		// TODO Auto-generated method stub
-		if(ZhengMain.wordMatch(userInput, good))
+		if(ZhengMain.wordMatch(userInput, bad))
+		{
+			ZhengMain.syso("rude");
+		}
+		else
 		{
 			String[] sidResponses = {"Did you know he is a ground sloth?","Sid's hillarious"};
 			int num = (int) (Math.random() * sidResponses.length);
 			ZhengMain.syso(sidResponses[num]);
-		}
-		else
-		{
-			ZhengMain.syso("rude");
 		}
 		
 	}
 
 	private void talkDiego(String userInput) {
 		// TODO Auto-generated method stub
-		if(ZhengMain.wordMatch(userInput, good))
+		if(ZhengMain.wordMatch(userInput, bad))
+		{
+			ZhengMain.syso("rude");
+		}
+		else
 		{
 			String[] diegoResponses = {"Did you know he's a saber toothed cat?"};
 			int num = (int) (Math.random() * diegoResponses.length);
 			ZhengMain.syso(diegoResponses[num]);
-		}
-		else
-		{
-			ZhengMain.syso("rude");
 		}
 	}
 
