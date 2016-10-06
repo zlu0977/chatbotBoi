@@ -8,7 +8,7 @@ public class RouseBook implements Chatbot{
 	private String[] books = {"Flight", "The Dresden Files","dresden","files"};
 	private int repeat = 0;
 	
-	public void talk() {
+	public void talk() {// the beginning.
 		inBookLoop = true;
 		ZhengMain.syso("Do you read?");
 		bookResponse = ZhengMain.promptInput();
@@ -38,7 +38,7 @@ public class RouseBook implements Chatbot{
 		return false;
 	}
 	
-	public void printResponse(){
+	public void printResponse(){//decides to complain or talk about books
 		if(ZhengMain.wordMatch(bookResponse, books))
 		{
 			talkBook();
@@ -47,12 +47,11 @@ public class RouseBook implements Chatbot{
 		else 
 		{
 			repeat++;
-			ZhengMain.syso(""+repeat);
 			talkBad(repeat);
 		}
 	}
 
-	public void talkBad(int irritationLevel) {
+	public void talkBad(int irritationLevel) {//gives different responses for repetion
 		String[] negatives = {"I don't want to talk about that.", "I would prefer to talk about something else.", "Let's change the conversation.", "LET'S. TALK. ABOUT. BOOKS.", "I'm on strike now."};
 		if(irritationLevel > negatives.length){
 			ZhengMain.syso(negatives[negatives.length-1]);
@@ -61,7 +60,7 @@ public class RouseBook implements Chatbot{
 		}
 	}
 
-	public void talkBook() {
+	public void talkBook() {//decides which book to talk about
 		if(ZhengMain.findKeyword(bookResponse, "Flight", 0) >= 0){
 			ZhengMain.syso("Flight it is! Have you heard of it?");
 			bookResponse = ZhengMain.promptInput();
