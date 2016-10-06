@@ -71,8 +71,12 @@ public class ZhengMusic implements Chatbot {
 				ZhengMain.syso("I like that type of music too!");
 			else if(ZhengMain.wordMatch(musicResponse, dislikedMusic))
 				ZhengMain.syso("I do not like that type of music...");
+                        else if(is triggered(music response))
+                                ZhengMain.syso("interesting taste that you have.");
 			else
 				ZhengMain.syso("I never heard of " + musicResponse + ".");
+
+                        musicLayer ++;
 		}
 		else if(musicLayer == 8)
 		{
@@ -113,7 +117,7 @@ public class ZhengMusic implements Chatbot {
 		stopCount = 0;
 		int lyricNum = 0;
 		String stopResponse;
-		String[] lyrics = {"Oh whoa \nOh whoa \nOh whoa", "You know you love me, I know you care", "Just shout whenever and I’ll be there", "You are my love, you are my heart", "And we will never ever ever be apart", "Are we an item? Girl, quit playing", "We’re just friends, what are you saying?", "Said There’s another, and looked right in my eyes", "My first love broke my heart for the first time and I was like", "Baby, baby, baby oh", "Like baby, baby, baby no", "Like baby, baby, baby no oh"};
+		String[] lyrics = {"Oh whoa \nOh whoa \nOh whoa", "You know you love me, I know you care", "Just shout whenever and Iâ€™ll be there", "You are my love, you are my heart", "And we will never ever ever be apart", "Are we an item? Girl, quit playing", "Weâ€™re just friends, what are you saying?", "Said Thereâ€™s another, and looked right in my eyes", "My first love broke my heart for the first time and I was like", "Baby, baby, baby oh", "Like baby, baby, baby no", "Like baby, baby, baby no oh"};
 		
 		while(inSingLoop)
 		{			
