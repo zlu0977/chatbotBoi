@@ -15,7 +15,7 @@ public class RouseBook implements Chatbot{
 		if(ZhengMain.wordMatch(bookResponse, new String[] {"yes","yeah","yea","sure","okay","ok"})){
 			while(inBookLoop){
 				if(repeat < 1){
-					ZhengMain.syso("Great! Let's talk about either the Dresden Files or Flight.");
+					ZhengMain.syso("Great, "+ZhengMain.user+"! Let's talk about either the Dresden Files or Flight.");
 				}else{
 					ZhengMain.syso("Let's talk about either the Dresden Files or Flight.");
 				}
