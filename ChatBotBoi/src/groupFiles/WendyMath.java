@@ -35,7 +35,7 @@ public class WendyMath implements Chatbot {
 		String[] trigger = {"+","-","/","*"};
 		for (int i = 0; i< trigger.length; i++)
 		{
-			if (ZhengMain.findKeyword(userInput, trigger[i], 0) > 0)
+			if (ZhengMain.findKeyword(userInput, trigger[i], 0) >= 0)
 			{
 				return true;
 			}

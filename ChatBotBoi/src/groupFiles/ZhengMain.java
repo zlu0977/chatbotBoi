@@ -13,6 +13,9 @@ public class ZhengMain {
 	static Chatbot music;
 	static Chatbot books;
 	
+	static Chatbot math;
+	static Chatbot politics;
+	
 	public static void main(String[] args) {
 		createFields();
 		initialize();
@@ -25,6 +28,9 @@ public class ZhengMain {
 		movies = new WendyMovies();
 		music = new ZhengMusic();
 		books = new RouseBook();
+		
+		math = new WendyMath();
+		politics = new WendyPolitics();
 	}
 	
 	public static String promptInput()
@@ -66,10 +72,19 @@ public class ZhengMain {
 			}
 			else if(books.isTriggered(response))
 			{
-				syso("I like books too.");
 				inMainLoop = false;
 				books.talk();
 			}
+			/*else if(math.isTriggered(response))
+			{
+				inMainLoop = false;
+				math.talk();
+			}
+			else if(politics.isTriggered(response))
+			{
+				inMainLoop = false;
+				politics.talk();
+			}*/
 			else
 				syso(getLastResponse()); 
 		}
