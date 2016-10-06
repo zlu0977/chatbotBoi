@@ -6,17 +6,19 @@ public class WendyMovies implements Chatbot{
 	private boolean inMovieLoop;
 	private boolean inIceAgeTalk = false;
 	private boolean talk;
+	private int timesAsk = 1;
+	private int movieLayers;
 	
 	String[] movies = {"Ice Age"};
 	String[] badResponses = {"I hate that movie","I don't want to talk about that movie"};
 	String[] badCharacters = {"Nope","Not my favorite, so let's not talk about it","Who likes him anyway?"};
-	int timesAsk;
 
 	@Override
 	public void talk() {
 		// TODO Auto-generated method stub
 		inMovieLoop = true; 
 		movieTalk = ZhengMain.response;
+		movieLayers = 1;
 		while(inMovieLoop)
 		{
 			printResponse(movieTalk);
@@ -32,50 +34,49 @@ public class WendyMovies implements Chatbot{
 
 	private void printResponse(String userInput) 
 	{
-		timesAsk = 1;
 		String[] good = {"love","like","favorite"};
 		
-		if(ZhengMain.findKeyword(userInput, "movies", 0) >= 0 || ZhengMain.findKeyword(userInput, "movie", 0) >= 0)
+		if(ZhengMain.findKeyword(userInput, "movies", 0) >= 0 || ZhengMain.findKeyword(userInput, "movie", 0) >= 0 && movieLayers == 1)
 		{
 			ZhengMain.syso("What is your favorite movie?");
+			movieLayers = 2;
 		}
-		else if(ZhengMain.findKeyword(userInput, "ice age", 0) >= 0 || inIceAgeTalk)
+		else if(movieLayers == 2)
 		{
-			inIceAgeTalk = true;
-			talkIceAge(userInput);
+			if(ZhengMain.findKeyword(userInput, "ice age", 0) >= 0 )
+			{
+				ZhengMain.syso("Really? That's my number " + timesAsk + " favorite movie too!");
+				ZhengMain.syso("Who's your favorite characters?");
+				movieLayers = 3;
+			}
+			else
+			{
+				movieLayers = 4;
+				timesAsk = timesAsk + 1;
+				talkBad();
+			}
 		}
-		else
-		{	
-			timesAsk++;
-			talkBad();
-		}	 
+		else if (movieLayers == 3)
+		{
+			if(ZhengMain.findKeyword(userInput, "Manny", 0) >= 0)
+			{
+				talkManny();
+			}
+			else if(ZhengMain.findKeyword(userInput, "Sid", 0) >= 0)
+			{
+				talkSid();
+			}
+			else if(ZhengMain.findKeyword(userInput, "Diego", 0) >= 0)
+			{
+				talkDiego();
+			}
+			else 
+			{
+				movieLayers = 5;
+				talkBadChar();
+			}
+		}
 
-	}
-
-	private void talkIceAge(String userInput) {
-		// TODO Auto-generated method stub
-		ZhengMain.syso("Really? That's my number " + timesAsk + " favorite movie too!");
-		String[] iceAgeChars = {"Manny","Sid","Diego"};
-		ZhengMain.syso("Who's your favorite characters?");
- 
-
-		if(ZhengMain.findKeyword(userInput, "Manny", 0) >= 0)
-		{
-			talkManny();
-		}
-		else if(ZhengMain.findKeyword(userInput, "Sid", 0) >= 0)
-		{
-			talkSid();
-		}
-		else if(ZhengMain.findKeyword(userInput, "Diego", 0) >= 0)
-		{
-			talkDiego();
-		}
-		else 
-		{
-			talkBadChar();
-		}
-		
 	}
 
 
@@ -104,22 +105,28 @@ public class WendyMovies implements Chatbot{
 
 	private void talkBadChar() {
 		// TODO Auto-generated method stub
-		int num = (int) (Math.random() * badCharacters.length);
-		ZhengMain.syso(badCharacters[num]);
-		ZhengMain.syso("Who's your next favorite?");
+		if(movieLayers == 5)
+		{
+			int num = (int) (Math.random() * badCharacters.length);
+			ZhengMain.syso(badCharacters[num]);
+			ZhengMain.syso("Who's your next favorite?");
+		}
 	}
 
 	private void talkBad() {
 		// TODO Auto-generated method stub
-		int num = (int) (Math.random() * badResponses.length);
-		ZhengMain.syso(badResponses[num]);
-		ZhengMain.syso("What's your number " + timesAsk + " favorite movie?");
+		if(movieLayers == 4)
+		{
+			int num = (int) (Math.random() * badResponses.length);
+			ZhengMain.syso(badResponses[num]);
+			ZhengMain.syso("What's your number " + timesAsk + " favorite movie?");
+		}
 	}
 
 	@Override
 	public boolean isTriggered(String userInput) {
 		// TODO Auto-generated method stub
-		String[] trigger = {"movie","Ice Age","Manny","Sid","diego","continental","drift","Ellie","peaches","Granny","movies"};
+		String[] trigger = {"movie","Ice Age","Manny","Sid","diego","continental","drift","Ellie","peaches","Granny","movies","batman","avengers","dory","nemo","superman","superhero","captain america","suicide squad","zootopia","ghostbusters","peculiar children","purge","kung fu panda","alice","looking glass"};
 		for (int i = 0; i<trigger.length; i++)
 		{
 			if(ZhengMain.findKeyword(userInput, trigger[i], 0) >= 0)
