@@ -52,7 +52,7 @@ public class RouseBook implements Chatbot{
 		}
 	}
 
-	private void talkBad(int irritationLevel) {
+	public void talkBad(int irritationLevel) {
 		String[] negatives = {"I don't want to talk about that.", "I would prefer to talk about something else.", "Let's change the conversation.", "LET'S. TALK. ABOUT. BOOKS.", "I'm on strike now."};
 		if(irritationLevel > negatives.length){
 			ZhengMain.syso(negatives[negatives.length-1]);
@@ -61,7 +61,7 @@ public class RouseBook implements Chatbot{
 		}
 	}
 
-	private void talkBook() {
+	public void talkBook() {
 		if(ZhengMain.findKeyword(bookResponse, "Flight", 0) >= 0){
 			ZhengMain.syso("Flight it is! Have you heard of it?");
 			bookResponse = ZhengMain.promptInput();
