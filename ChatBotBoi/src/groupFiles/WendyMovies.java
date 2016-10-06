@@ -97,7 +97,7 @@ public class WendyMovies implements Chatbot{
 		{
 			String[] mannyResponses = {"Did you know he's a wooly mammoth?","Isn't he poofy?"};
 			int num = (int) (Math.random() * mannyResponses.length);
-			ZhengMain.syso(mannyResponses[num]);
+			ZhengMain.syso(mannyResponses[num] + ZhengMain.user);
 		}
 		
 		
@@ -128,7 +128,7 @@ public class WendyMovies implements Chatbot{
 		{
 			String[] diegoResponses = {"Did you know he's a saber toothed cat?"};
 			int num = (int) (Math.random() * diegoResponses.length);
-			ZhengMain.syso(diegoResponses[num]);
+			ZhengMain.syso(diegoResponses[num] + ZhengMain.user);
 		}
 	}
 
