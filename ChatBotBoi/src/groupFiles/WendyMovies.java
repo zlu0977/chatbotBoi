@@ -4,13 +4,12 @@ public class WendyMovies implements Chatbot{
 	
 	private String movieTalk;
 	private boolean inMovieLoop;
-	private boolean inIceAgeTalk = false;
-	private boolean talk;
 	private int timesAsk = 1;
 	private int movieLayers;
+	String[] good = {"love","like","favorite"};
 	
 	String[] movies = {"Ice Age"};
-	String[] badResponses = {"I hate that movie","I don't want to talk about that movie"};
+	String[] badResponses = {"I hate that movie","I don't want to talk about that movie","interesting taste, but sorry not my type","don't like it"};
 	String[] badCharacters = {"Nope","Not my favorite, so let's not talk about it","Who likes him anyway?"};
 
 	@Override
@@ -34,7 +33,6 @@ public class WendyMovies implements Chatbot{
 
 	private void printResponse(String userInput) 
 	{
-		String[] good = {"love","like","favorite"};
 		
 		if(ZhengMain.findKeyword(userInput, "movies", 0) >= 0 || ZhengMain.findKeyword(userInput, "movie", 0) >= 0 && movieLayers == 1)
 		{
@@ -58,17 +56,18 @@ public class WendyMovies implements Chatbot{
 		}
 		else if (movieLayers == 3)
 		{
+			
 			if(ZhengMain.findKeyword(userInput, "Manny", 0) >= 0)
 			{
-				talkManny();
+					talkManny(userInput);	
 			}
 			else if(ZhengMain.findKeyword(userInput, "Sid", 0) >= 0)
 			{
-				talkSid();
+					talkSid(userInput);
 			}
 			else if(ZhengMain.findKeyword(userInput, "Diego", 0) >= 0)
 			{
-				talkDiego();
+					talkDiego(userInput);
 			}
 			else 
 			{
@@ -80,27 +79,50 @@ public class WendyMovies implements Chatbot{
 	}
 
 
-	private void talkManny() {
+	private void talkManny(String userInput) {
 		// TODO Auto-generated method stub
-		String[] mannyResponses = {"Did you know he's a wooly mammoth?","Isn't he poofy?"};
-		int num = (int) (Math.random() * mannyResponses.length);
-		ZhengMain.syso(mannyResponses[num]);
+		
+		if(ZhengMain.wordMatch(userInput, good))
+		{
+			String[] mannyResponses = {"Did you know he's a wooly mammoth?","Isn't he poofy?"};
+			int num = (int) (Math.random() * mannyResponses.length);
+			ZhengMain.syso(mannyResponses[num]);
+		}
+		else
+		{
+			ZhengMain.syso("rude");
+		}
+		
 		
 	}
 
-	private void talkSid() {
+	private void talkSid(String userInput) {
 		// TODO Auto-generated method stub
-		String[] sidResponses = {"Did you know he is a ground sloth?","Sid's hillarious"};
-		int num = (int) (Math.random() * sidResponses.length);
-		ZhengMain.syso(sidResponses[num]);
+		if(ZhengMain.wordMatch(userInput, good))
+		{
+			String[] sidResponses = {"Did you know he is a ground sloth?","Sid's hillarious"};
+			int num = (int) (Math.random() * sidResponses.length);
+			ZhengMain.syso(sidResponses[num]);
+		}
+		else
+		{
+			ZhengMain.syso("rude");
+		}
 		
 	}
 
-	private void talkDiego() {
+	private void talkDiego(String userInput) {
 		// TODO Auto-generated method stub
-		String[] diegoResponses = {"Did you know he's a saber toothed cat?"};
-		int num = (int) (Math.random() * diegoResponses.length);
-		ZhengMain.syso(diegoResponses[num]);
+		if(ZhengMain.wordMatch(userInput, good))
+		{
+			String[] diegoResponses = {"Did you know he's a saber toothed cat?"};
+			int num = (int) (Math.random() * diegoResponses.length);
+			ZhengMain.syso(diegoResponses[num]);
+		}
+		else
+		{
+			ZhengMain.syso("rude");
+		}
 	}
 
 	private void talkBadChar() {
@@ -126,7 +148,7 @@ public class WendyMovies implements Chatbot{
 	@Override
 	public boolean isTriggered(String userInput) {
 		// TODO Auto-generated method stub
-		String[] trigger = {"movie","Ice Age","Manny","Sid","diego","continental","drift","Ellie","peaches","Granny","movies","batman","avengers","dory","nemo","superman","superhero","captain america","suicide squad","zootopia","ghostbusters","peculiar children","purge","kung fu panda","alice","looking glass"};
+		String[] trigger = {"movie","Ice Age","Manny","Sid","diego","continental","drift","Ellie","peaches","Granny","movies","batman","avengers","dory","nemo","superman","superhero","captain america","suicide squad","zootopia","ghostbusters","peculiar children","purge","kung fu panda","alice","looking glass","huntsmen","central intelligence"};
 		for (int i = 0; i<trigger.length; i++)
 		{
 			if(ZhengMain.findKeyword(userInput, trigger[i], 0) >= 0)
