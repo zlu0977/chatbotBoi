@@ -43,9 +43,16 @@ public class WendyMovies implements Chatbot{
 		{
 			if(ZhengMain.findKeyword(userInput, "ice age", 0) >= 0 )
 			{
-				ZhengMain.syso("Really? That's my number " + timesAsk + " favorite movie too!");
-				ZhengMain.syso("Who's your favorite characters?");
-				movieLayers = 3;
+				if (ZhengMain.wordMatch(userInput, bad))
+				{
+					ZhengMain.syso("rude");
+				}
+				else
+				{
+					ZhengMain.syso("Really? That's my number " + timesAsk + " favorite movie too!");
+					ZhengMain.syso("Who's your favorite characters?");
+					movieLayers = 3;
+				}
 			}
 			else
 			{
