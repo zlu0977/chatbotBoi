@@ -6,14 +6,17 @@ public class RouseBook implements Chatbot{
 	private String bookResponse;
 	private boolean inBookLoop;
 	private String[] books = {"Flight", "The Dresden Files"};
+	private int repeat;
 	
 	public void talk() {
 		inBookLoop = true;
 		ZhengMain.syso("Do you read?");
 		bookResponse = ZhengMain.promptInput();
-		if(ZhengMain.findKeyword(bookResponse, "yes", 0) >= 0){
+		if(ZhengMain.wordMatch(bookResponse, new String[] {"yes","yeah","yea","sure","okay","ok"})){
 			while(inBookLoop){
+				ZhengMain.syso("Great! Let's talk about either the Dresden Files or Flight.");
 				bookResponse = ZhengMain.promptInput();
+				printResponse();
 			}
 		}else{
 			inBookLoop = false;
@@ -31,23 +34,27 @@ public class RouseBook implements Chatbot{
 		return false;
 	}
 	
-	public void printResponse(String userIn){
-		int repeat = 1;
+	public void printResponse(){
+		repeat = 1;
 		for(int i = 0; i < books.length; i++){
 			
-			if(ZhengMain.findKeyword(userIn, books[i], 0) >= 0)
+			if(ZhengMain.findKeyword(bookResponse, books[i], 0) >= 0)
 			{
 				talkBook();
 				return;
 			}
 			else 
-			{	
+			{
 				repeat++;
 				talkBad(repeat);
-			}	
+			}
 			
 		}
 	}
+	
+/*	public boolean checkRepeat(){
+		if()
+	}*/
 
 	private void talkBad(int irritationLevel) {
 		String[] negatives = {"I don't want to talk about that.", "I would prefer to talk about something else.", "Let's change the conversation.", "LET'S. TALK. ABOUT. BOOKS.", "I'm on strike now."};
@@ -59,15 +66,39 @@ public class RouseBook implements Chatbot{
 	}
 
 	private void talkBook() {
-		ZhengMain.syso("Do you want to talk about Flight or the Dresden Files?");
 		bookResponse = ZhengMain.promptInput();
 		if(ZhengMain.findKeyword(bookResponse, "Flight", 0) >= 0){
-			flightTalk();
-		}else if(ZhengMain.findKeyword(bookResponse, "the Dresden Files", 0) >= 0){
-			dresTalk();
+			ZhengMain.syso("Flight it is! Have you heard of it?");
+			bookResponse = ZhengMain.promptInput();
+			if(ZhengMain.wordMatch(bookResponse, new String[] {"yes","yeah","yea","sure","okay","ok"})){
+				ZhengMain.syso("Isn't it so beautiful?");
+				if(ZhengMain.wordMatch(bookResponse, new String[] {"yes","yeah","yea","sure","okay","ok"})){
+					ZhengMain.syso("... I don't have much else to say");
+					inBookLoop = false;
+				}else{
+					ZhengMain.syso("Well, I think it's cool...");
+					inBookLoop = false;
+				}
+			}else{
+				ZhengMain.syso("It's a collection of books, each with a collection of short graphic novels. Some continue from one book to another, some are one shots. How cool is that!");
+				inBookLoop = false;
+			}
 		}else{
-			"";
+			ZhengMain.syso("The Dresden Files it is! Have you heard of it?");
+			bookResponse = ZhengMain.promptInput();
+			if(ZhengMain.wordMatch(bookResponse, new String[] {"yes","yeah","yea","sure","okay","ok"})){
+				ZhengMain.syso("Isn't it so awesome?");
+				if(ZhengMain.wordMatch(bookResponse, new String[] {"yes","yeah","yea","sure","okay","ok"})){
+					ZhengMain.syso("... I don't have much else to say");
+					inBookLoop = false;
+				}else{
+					ZhengMain.syso("Well, I think it's cool...");
+					inBookLoop = false;
+				}
+			}else{
+				ZhengMain.syso("It's a series of books, and it's basically mystery + urban fantasy + explosions. How cool is that?!");
+				inBookLoop = false;
+			}
 		}
 	}
-
 }
