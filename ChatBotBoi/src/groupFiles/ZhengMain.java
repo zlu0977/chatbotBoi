@@ -15,7 +15,7 @@ public class ZhengMain {
 	
 	public static void main(String[] args) {
 		createFields();
-		
+		initialize();
 		promptForever();
 	}
 	
@@ -24,18 +24,25 @@ public class ZhengMain {
 		input = new Scanner(System.in);
 		movies = new WendyMovies();
 		music = new ZhengMusic();
+		books = new RouseBook();
 	}
 	
 	public static String promptInput()
 	{
-		String userInput = input.nextLine();
-		return userInput;
+		return input.nextLine();
+
+	}
+	
+	public static void initialize()
+	{
+		syso("Hi, what is your name?");
+		user = promptInput();
+		syso("Hi " + user + ". How are you?");
 	}
 	
 	public static void promptForever()
 	{	
 		inMainLoop = true;
-		System.out.println("Hi, how are you?");
 		while(inMainLoop)
 		{
 			response = promptInput();
@@ -43,7 +50,7 @@ public class ZhengMain {
 			if(findKeyword(response, "good", 0) >= 0)
 			{
 				syso("Thats wonderful.");
-				syso("What do you want to talk about?");
+				syso("What do you want to talk about? Books, movies or music?");
 			}
 			else if(music.isTriggered(response))
 			{
@@ -56,6 +63,12 @@ public class ZhengMain {
 				syso("I like movies too.");
 				inMainLoop = false;
 				movies.talk();
+			}
+			else if(books.isTriggered(response))
+			{
+				syso("I like books too.");
+				inMainLoop = false;
+				books.talk();
 			}
 			else
 				syso(getLastResponse()); 
@@ -88,6 +101,15 @@ public class ZhengMain {
 		return -1;
 	}
 	
+	public static boolean wordMatch(String searchString, String[] keywords)
+	{
+		for(String keyword : keywords)
+			if(findKeyword(searchString, keyword, 0) >= 0)
+				return true;
+
+		return false;
+	}
+	
 	private static boolean noNegations(String searchString, int psn) {
 		String[] negationsList = {"no ", "not ", "never ", "n't "};
 		
@@ -98,18 +120,6 @@ public class ZhengMain {
 				return false;
 		}
 		return true;
-		
-		/*if(psn - 3 >= 0 && searchString.substring(psn - 3, psn).equals("no "))
-			return true;
-		  if(psn - 4 >= 0 && searchString.substring(psn - 4, psn).equals("not "))
-			return true;
-		  if(psn - 6 >= 0 && searchString.substring(psn - 6, psn).equals("never "))
-			return true;
-		  if(psn - 4 >= 0 && searchString.substring(psn - 4, psn).equals("n't "))
-			return true;
-			
-		return false;*/
-		
 	}
 	
 	public static int isQuestion(String userInput)
@@ -131,9 +141,9 @@ public class ZhengMain {
 		return responses[(int) (Math.random() * responses.length)];
 	}
 
-        public static String getRandomQuestion()
+        public static String getRandomResponse()
         {
-                String[] questions = {""};
+                String[] questions = {"Give me a math problem.", ""};
                 return questions[(int) (Math.random() * questions.length)];
         }
 

@@ -3,10 +3,17 @@ package groupFiles;
 public class ZhengMusic implements Chatbot {
 	private String musicResponse;
 	private boolean inMusicLoop;
+	private boolean inSingLoop = false;
+	private int stopCount;
+	private int musicLayer;
+	
+	private String[] preferedMusic = {"classic", "classical", "techno", "jpop", "salsa"};
+	private String[] dislikedMusic = {"jazz", "bachata", "metal", "rap"};
 	
 	public void talk() {
 		inMusicLoop = true;
 		musicResponse = ZhengMain.response;
+		musicLayer = 0;
 		while(inMusicLoop)
 		{
 			printResponse();
@@ -22,7 +29,7 @@ public class ZhengMusic implements Chatbot {
 	}
   
 	public boolean isTriggered(String userInput) {
-		String[] triggers = {"music", "lyric", "lyrics", "song", "songs", "classical", "classic", "pop", "rock", "jazz", "kpop", "jpop", "salsa", "bachata", "metal", "techno", "hip hop", "rap"};
+		String[] triggers = {"music", "lyric", "lyrics", "song", "songs", "sing", "classical", "classic", "pop", "rock", "jazz", "kpop", "jpop", "salsa", "bachata", "metal", "techno", "hip hop", "rap"};
 		
 		for(int i = 0; i < triggers.length; i ++)
 			if(ZhengMain.findKeyword(userInput, triggers[i], 0) >= 0)
@@ -33,10 +40,65 @@ public class ZhengMusic implements Chatbot {
 	
 	private void printResponse()
 	{
-		if(ZhengMain.findKeyword(musicResponse, "music", 0) >= 0)
-			if(ZhengMain.isQuestion(musicResponse) >= 0)
-				ZhengMain.syso("this is a question about music");
+		if(musicLayer == 0)
+		{
+			if(ZhengMain.findKeyword(musicResponse, "sing", 0) >= 0)
+				sing();
+			else if(ZhengMain.wordMatch(musicResponse, new String[] {"music", "lytic", "lyrics", "song", "songs"}))
+			{
+				ZhengMain.syso("What kind of music do you like?");
+				musicLayer ++;
+			}
 			else
-				ZhengMain.syso("this is not a question");
+			{
+				if(ZhengMain.wordMatch(musicResponse, preferedMusic))
+					ZhengMain.syso("I like that type of music too!");
+				else if(ZhengMain.wordMatch(musicResponse, dislikedMusic))
+					ZhengMain.syso("I do not like that type of music...");
+				else
+					ZhengMain.syso("I never heard of " + musicResponse + ".");
+					
+				
+				musicLayer = 2;
+			}
+		}
+		else if(musicLayer == 1)
+		{
+			if(ZhengMain.wordMatch(musicResponse, preferedMusic))
+				ZhengMain.syso("I like that type of music too!");
+			else if(ZhengMain.wordMatch(musicResponse, dislikedMusic))
+				ZhengMain.syso("I do not like that type of music...");
+			else
+				ZhengMain.syso("I never heard of " + musicResponse + ".");
+		}
+		
+	}
+	
+	private void sing()
+	{
+		inSingLoop = true;
+		stopCount = 0;
+		int lyricNum = 0;
+		String[] lyrics = {"Oh whoa \nOh whoa \nOh whoa", "You know you love me, I know you care", "Just shout whenever and I’ll be there", "You are my love, you are my heart", "And we will never ever ever be apart", "Are we an item? Girl, quit playing", "We’re just friends, what are you saying?", "Said There’s another, and looked right in my eyes", "My first love broke my heart for the first time and I was like", "Baby, baby, baby oh", "Like baby, baby, baby no", "Like baby, baby, baby no oh"};
+		
+		while(inSingLoop)
+		{			
+			ZhengMain.syso(lyrics[lyricNum]);
+			lyricNum ++;
+			
+			if(lyricNum >= lyrics.length)
+				lyricNum = lyrics.length - 3;
+			
+			if(ZhengMain.findKeyword(ZhengMain.promptInput(), "stop", 0) >= 0)
+			{
+				stopCount ++;
+				
+				if(stopCount >= 3)
+				{
+					inSingLoop = false;
+					ZhengMain.syso("Ok fine.... How was my singing?");
+				}
+			}
+		}
 	}
 }
