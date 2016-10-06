@@ -5,8 +5,8 @@ public class RouseBook implements Chatbot{
 	private String[] keywords = {"book","books","novel","novels","manga"};
 	private String bookResponse;
 	private boolean inBookLoop;
-	private String[] books = {"Flight", "The Dresden Files"};
-	private int repeat;
+	private String[] books = {"Flight", "The Dresden Files","dresden","files"};
+	private int repeat = 0;
 	
 	public void talk() {
 		inBookLoop = true;
@@ -14,7 +14,11 @@ public class RouseBook implements Chatbot{
 		bookResponse = ZhengMain.promptInput();
 		if(ZhengMain.wordMatch(bookResponse, new String[] {"yes","yeah","yea","sure","okay","ok"})){
 			while(inBookLoop){
-				ZhengMain.syso("Great! Let's talk about either the Dresden Files or Flight.");
+				if(repeat < 1){
+					ZhengMain.syso("Great! Let's talk about either the Dresden Files or Flight.");
+				}else{
+					ZhengMain.syso("Let's talk about either the Dresden Files or Flight.");
+				}
 				bookResponse = ZhengMain.promptInput();
 				printResponse();
 			}
@@ -35,38 +39,29 @@ public class RouseBook implements Chatbot{
 	}
 	
 	public void printResponse(){
-		repeat = 1;
-		for(int i = 0; i < books.length; i++){
-			
-			if(ZhengMain.findKeyword(bookResponse, books[i], 0) >= 0)
-			{
-				talkBook();
-				return;
-			}
-			else 
-			{
-				repeat++;
-				talkBad(repeat);
-			}
-			
+		if(ZhengMain.wordMatch(bookResponse, books))
+		{
+			talkBook();
+			return;
+		}
+		else 
+		{
+			repeat++;
+			ZhengMain.syso(""+repeat);
+			talkBad(repeat);
 		}
 	}
-	
-/*	public boolean checkRepeat(){
-		if()
-	}*/
 
 	private void talkBad(int irritationLevel) {
 		String[] negatives = {"I don't want to talk about that.", "I would prefer to talk about something else.", "Let's change the conversation.", "LET'S. TALK. ABOUT. BOOKS.", "I'm on strike now."};
 		if(irritationLevel > negatives.length){
-			ZhengMain.syso(negatives[irritationLevel-1]);
-		}else{
 			ZhengMain.syso(negatives[negatives.length-1]);
+		}else{
+			ZhengMain.syso(negatives[irritationLevel-1]);
 		}
 	}
 
 	private void talkBook() {
-		bookResponse = ZhengMain.promptInput();
 		if(ZhengMain.findKeyword(bookResponse, "Flight", 0) >= 0){
 			ZhengMain.syso("Flight it is! Have you heard of it?");
 			bookResponse = ZhengMain.promptInput();
@@ -75,13 +70,16 @@ public class RouseBook implements Chatbot{
 				if(ZhengMain.wordMatch(bookResponse, new String[] {"yes","yeah","yea","sure","okay","ok"})){
 					ZhengMain.syso("... I don't have much else to say");
 					inBookLoop = false;
+					ZhengMain.promptForever();
 				}else{
 					ZhengMain.syso("Well, I think it's cool...");
 					inBookLoop = false;
+					ZhengMain.promptForever();
 				}
 			}else{
 				ZhengMain.syso("It's a collection of books, each with a collection of short graphic novels. Some continue from one book to another, some are one shots. How cool is that!");
 				inBookLoop = false;
+				ZhengMain.promptForever();
 			}
 		}else{
 			ZhengMain.syso("The Dresden Files it is! Have you heard of it?");
@@ -91,13 +89,16 @@ public class RouseBook implements Chatbot{
 				if(ZhengMain.wordMatch(bookResponse, new String[] {"yes","yeah","yea","sure","okay","ok"})){
 					ZhengMain.syso("... I don't have much else to say");
 					inBookLoop = false;
+					ZhengMain.promptForever();
 				}else{
 					ZhengMain.syso("Well, I think it's cool...");
 					inBookLoop = false;
+					ZhengMain.promptForever();
 				}
 			}else{
 				ZhengMain.syso("It's a series of books, and it's basically mystery + urban fantasy + explosions. How cool is that?!");
 				inBookLoop = false;
+				ZhengMain.promptForever();
 			}
 		}
 	}
