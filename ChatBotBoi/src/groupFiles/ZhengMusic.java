@@ -19,7 +19,7 @@ public class ZhengMusic implements Chatbot {
 			printResponse();
 			musicResponse = ZhengMain.promptInput();
 			
-			if(!isTriggered(musicResponse))
+			if(!isTriggered(musicResponse) && musicLayer!= 1 && musicLayer != 8 && musicLayer != 9 && musicLayer != 10)
 			{
 				inMusicLoop = false;
 				ZhengMain.promptForever();
@@ -47,7 +47,7 @@ public class ZhengMusic implements Chatbot {
 				sing();
 				musicLayer ++;
 			}
-			else if(ZhengMain.wordMatch(musicResponse, new String[] {"music", "lytic", "lyrics", "song", "songs"}))
+			else if(ZhengMain.wordMatch(musicResponse, new String[] {"music", "lyric", "lyrics", "song", "songs"}))
 			{
 				ZhengMain.syso("What kind of music do you like?");
 				musicLayer ++;
@@ -62,7 +62,7 @@ public class ZhengMusic implements Chatbot {
 					ZhengMain.syso("I never heard of " + musicResponse + ".");
 					
 				
-				musicLayer = 2;
+				musicLayer = 8;
 			}
 		}
 		else if(musicLayer == 1)
@@ -71,12 +71,12 @@ public class ZhengMusic implements Chatbot {
 				ZhengMain.syso("I like that type of music too!");
 			else if(ZhengMain.wordMatch(musicResponse, dislikedMusic))
 				ZhengMain.syso("I do not like that type of music...");
-                        else if(is triggered(music response))
-                                ZhengMain.syso("interesting taste that you have.");
+            else if(isTriggered(musicResponse))
+                ZhengMain.syso("interesting taste that you have.");
 			else
 				ZhengMain.syso("I never heard of " + musicResponse + ".");
 
-                        musicLayer ++;
+                        musicLayer = 8;
 		}
 		else if(musicLayer == 8)
 		{
@@ -85,30 +85,27 @@ public class ZhengMusic implements Chatbot {
 		}
 		else if(musicLayer == 9)
 		{
-			if(ZhengMain.findKeyword(musicResponse, "yes", 0) >= 0)
-			{
-				sing();
-				musicLayer ++;
+			if(!ZhengMain.wordMatch(musicResponse, new String[] {"yea", "yes", "yeah"}))
+				ZhengMain.syso("Well I am going to sing anyways.");
+
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			else if(ZhengMain.findKeyword(musicResponse, "no", 0) >= 0)
-			{
-				ZhengMain.syso("Aw. You're missing out.");
-				musicLayer = 11;
-			}
-			else
-			{
-				ZhengMain.syso("I will take that as a yes...");
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				sing();
-				musicLayer ++;
-			}
+			sing();
+			musicLayer ++;
 		}
-		
+		else if(musicLayer == 10)
+		{
+			if(ZhengMain.wordMatch(musicResponse, new String[] {"amazing", "awesome", "good", "ok", "alright", "not bad", "epic", "outstanding", "superbe"}))
+				ZhengMain.syso("Thanks! you make me happy.");
+			else
+				ZhengMain.syso("Wow rude! I do not want to talk to you anymore.");
+			
+			musicLayer ++;
+		}
 	}
 	
 	private void sing()
@@ -117,7 +114,7 @@ public class ZhengMusic implements Chatbot {
 		stopCount = 0;
 		int lyricNum = 0;
 		String stopResponse;
-		String[] lyrics = {"Oh whoa \nOh whoa \nOh whoa", "You know you love me, I know you care", "Just shout whenever and I’ll be there", "You are my love, you are my heart", "And we will never ever ever be apart", "Are we an item? Girl, quit playing", "We’re just friends, what are you saying?", "Said There’s another, and looked right in my eyes", "My first love broke my heart for the first time and I was like", "Baby, baby, baby oh", "Like baby, baby, baby no", "Like baby, baby, baby no oh"};
+		String[] lyrics = {"Oh whoa \nOh whoa \nOh whoa", "You know you love me, I know you care", "Just shout whenever and I'll be there", "You are my love, you are my heart", "And we will never ever ever be apart", "Are we an item? Girl, quit playing", "W're just friends, what are you saying?", "Said There’s another, and looked right in my eyes", "My first love broke my heart for the first time and I was like", "Baby, baby, baby oh", "Like baby, baby, baby no", "Like baby, baby, baby no oh"};
 		
 		while(inSingLoop)
 		{			
