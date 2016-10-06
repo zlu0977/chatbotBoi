@@ -29,8 +29,6 @@ public class ZhengMain {
 		music = new ZhengMusic();
 		books = new RouseBook();
 		
-		math = new WendyMath();
-		politics = new WendyPolitics();
 	}
 	
 	public static String promptInput()
