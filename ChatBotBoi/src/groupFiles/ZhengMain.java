@@ -146,12 +146,6 @@ public class ZhengMain {
 		return responses[(int) (Math.random() * responses.length)];
 	}
 
-        public static String getRandomResponse()
-        {
-                String[] questions = {"Give me a math problem.", ""};
-                return questions[(int) (Math.random() * questions.length)];
-        }
-
 	public static void syso(String string)
 	{
 		System.out.println(string);

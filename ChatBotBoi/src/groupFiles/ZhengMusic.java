@@ -102,7 +102,7 @@ public class ZhengMusic implements Chatbot {
 				ZhengMain.syso("Well I am going to sing anyways.");
 
 			try {
-				Thread.sleep(1500);
+				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -122,11 +122,28 @@ public class ZhengMusic implements Chatbot {
 		else if(musicLayer == 10)
 		{
 			if(ZhengMain.wordMatch(musicResponse, new String[] {"amazing", "awesome", "good", "great", "ok", "alright", "not bad", "epic", "outstanding", "superbe"}))
+			{
 				ZhengMain.syso("Thanks! you make me happy.");
+				ZhengMain.syso("Do you want to talk about something else? Maybe books or movies?");
+				musicLayer ++;
+			}
 			else
-				ZhengMain.syso("Wow rude! I do not want to talk to you anymore.");
-			
-			musicLayer ++;
+			{
+				ZhengMain.syso("Wow rude! I do not want to talk to you about music anymore.");
+				inMusicLoop = false;
+				ZhengMain.promptForever();
+			}
+		}
+		else if(musicLayer == 11)
+		{
+			if(ZhengMain.wordMatch(musicResponse, new String[] {"no", "nope", "naw", "nah", "I am good", "I'm good"}))
+				ZhengMain.syso("Please.... I do not have anything else to say about music...");
+			else
+			{
+				ZhengMain.syso("What do you want to talk about? Books, movies?");
+				inMusicLoop = false;
+				ZhengMain.promptForever();
+			}
 		}
 	}
 	
@@ -162,7 +179,7 @@ public class ZhengMusic implements Chatbot {
 	
 	private boolean ignoreQuitMusic(int currentLayer)
 	{
-		int[] ignoreLayers = {1, 2, 7, 8, 9, 10};
+		int[] ignoreLayers = {1, 2, 7, 8, 9, 10, 11};
 		
 		for(int layer: ignoreLayers)
 			if(currentLayer == layer)
