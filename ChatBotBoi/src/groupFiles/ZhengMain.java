@@ -42,6 +42,13 @@ public class ZhengMain {
 		syso("Hi, what is your name?");
 		user = promptInput();
 		syso("Hi " + user + ". How are you?");
+		response = promptInput();
+		if(wordMatch(response, new String[] {"good", "great", "awesome", "wonderful", "fantastic", "ok", "okay", "fine", "wonderful"}))
+			syso("Thats wonderful.");
+		else
+			syso("Sad to hear that.");
+		
+		syso("What do you want to talk about? Books, movies or music?");
 	}
 	
 	public static void promptForever()
@@ -51,12 +58,7 @@ public class ZhengMain {
 		{
 			response = promptInput();
 			
-			if(findKeyword(response, "good", 0) >= 0)
-			{
-				syso("Thats wonderful.");
-				syso("What do you want to talk about? Books, movies or music?");
-			}
-			else if(music.isTriggered(response))
+			if(music.isTriggered(response))
 			{
 				syso("I like music too.");
 				inMainLoop = false;
@@ -73,16 +75,6 @@ public class ZhengMain {
 				inMainLoop = false;
 				books.talk();
 			}
-			/*else if(math.isTriggered(response))
-			{
-				inMainLoop = false;
-				math.talk();
-			}
-			else if(politics.isTriggered(response))
-			{
-				inMainLoop = false;
-				politics.talk();
-			}*/
 			else
 				syso(getLastResponse()); 
 		}
@@ -150,7 +142,7 @@ public class ZhengMain {
 	
 	public static String getLastResponse()
 	{
-		String[] responses = {"I see...", "Wow. I never knew.", "Thats nice.", "I dont get it."};
+		String[] responses = {"I see...", "Wow. I never knew.", "Thats nice.", "I dont get it.", "Cool...", "I do not know what that is"};
 		return responses[(int) (Math.random() * responses.length)];
 	}
 

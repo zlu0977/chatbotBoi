@@ -19,7 +19,7 @@ public class ZhengMusic implements Chatbot {
 			printResponse();
 			musicResponse = ZhengMain.promptInput();
 			
-			if(!isTriggered(musicResponse) && musicLayer!= 1 && musicLayer != 8 && musicLayer != 9 && musicLayer != 10)
+			if(!isTriggered(musicResponse) && ignoreQuitMusic(musicLayer))
 			{
 				inMusicLoop = false;
 				ZhengMain.promptForever();
@@ -40,14 +40,14 @@ public class ZhengMusic implements Chatbot {
 	
 	private void printResponse()
 	{
-		if(musicLayer == 0)
+		if(ZhengMain.findKeyword(musicResponse, "sing", 0) >= 0)
 		{
-			if(ZhengMain.findKeyword(musicResponse, "sing", 0) >= 0)
-			{
-				sing();
-				musicLayer ++;
-			}
-			else if(ZhengMain.wordMatch(musicResponse, new String[] {"music", "lyric", "lyrics", "song", "songs"}))
+			ZhengMain.syso("Do you really want to hear me sing?");
+			musicLayer = 9;
+		}
+		else if(musicLayer == 0)
+		{
+			if(ZhengMain.wordMatch(musicResponse, new String[] {"music", "lyric", "lyrics", "song", "songs"}))
 			{
 				ZhengMain.syso("What kind of music do you like?");
 				musicLayer ++;
@@ -58,38 +58,60 @@ public class ZhengMusic implements Chatbot {
 					ZhengMain.syso("I like that type of music too!");
 				else if(ZhengMain.wordMatch(musicResponse, dislikedMusic))
 					ZhengMain.syso("I do not like that type of music...");
+				else if(isTriggered(musicResponse))
+		            ZhengMain.syso("interesting taste that you have.");
 				else
 					ZhengMain.syso("I never heard of " + musicResponse + ".");
 					
-				
-				musicLayer = 8;
+				ZhengMain.syso("Who is your favorite artist or singer?");
+				musicLayer = 2;
 			}
 		}
 		else if(musicLayer == 1)
 		{
 			if(ZhengMain.wordMatch(musicResponse, preferedMusic))
-				ZhengMain.syso("I like that type of music too!");
+				ZhengMain.syso("I love "+ musicResponse +" of music too!");
 			else if(ZhengMain.wordMatch(musicResponse, dislikedMusic))
-				ZhengMain.syso("I do not like that type of music...");
+				ZhengMain.syso("I do not like "+ musicResponse +" music. :/");
             else if(isTriggered(musicResponse))
-                ZhengMain.syso("interesting taste that you have.");
+                ZhengMain.syso(musicResponse + " is alright.");
 			else
 				ZhengMain.syso("I never heard of " + musicResponse + ".");
-
-                        musicLayer = 8;
+			
+			ZhengMain.syso("Who is your favorite artist or singer that make "+ musicResponse +" music?");
+			musicLayer = 2;
+		}
+		else if(musicLayer == 2)
+		{
+			ZhengMain.syso("Interesting. I never heard of " + musicResponse + ". I need to look them up later.");
+			musicLayer = 7;
+		}
+		else if(musicLayer == 7)
+		{
+			ZhengMain.syso("Hey....");
+			musicLayer ++;
 		}
 		else if(musicLayer == 8)
 		{
-			ZhengMain.syso("Want to hear me sing?");
+			ZhengMain.syso("Want to hear me sing? :D");
 			musicLayer ++;
 		}
 		else if(musicLayer == 9)
 		{
-			if(!ZhengMain.wordMatch(musicResponse, new String[] {"yea", "yes", "yeah"}))
+			if(!ZhengMain.wordMatch(musicResponse, new String[] {"yea", "yes", "yeah", "yep", "sure"}))
 				ZhengMain.syso("Well I am going to sing anyways.");
 
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(1500);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			ZhengMain.syso("Ahem.");
+			
+			try {
+				Thread.sleep(2000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -99,7 +121,7 @@ public class ZhengMusic implements Chatbot {
 		}
 		else if(musicLayer == 10)
 		{
-			if(ZhengMain.wordMatch(musicResponse, new String[] {"amazing", "awesome", "good", "ok", "alright", "not bad", "epic", "outstanding", "superbe"}))
+			if(ZhengMain.wordMatch(musicResponse, new String[] {"amazing", "awesome", "good", "great", "ok", "alright", "not bad", "epic", "outstanding", "superbe"}))
 				ZhengMain.syso("Thanks! you make me happy.");
 			else
 				ZhengMain.syso("Wow rude! I do not want to talk to you anymore.");
@@ -136,5 +158,16 @@ public class ZhengMusic implements Chatbot {
 				}
 			}
 		}
+	}
+	
+	private boolean ignoreQuitMusic(int currentLayer)
+	{
+		int[] ignoreLayers = {1, 2, 7, 8, 9, 10};
+		
+		for(int layer: ignoreLayers)
+			if(currentLayer == layer)
+				return false;
+						
+		return true;
 	}
 }
