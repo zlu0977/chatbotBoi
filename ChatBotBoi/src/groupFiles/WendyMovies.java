@@ -22,7 +22,7 @@ public class WendyMovies implements Chatbot{
 		{
 			printResponse(movieTalk);
 			movieTalk = ZhengMain.promptInput();
-			if(!isTriggered(movieTalk))
+			if(!isTriggered(movieTalk) && movieLayers != 2 && movieLayers != 3)
 			{
 				inMovieLoop = false;
 				ZhengMain.promptForever();
@@ -56,7 +56,6 @@ public class WendyMovies implements Chatbot{
 			}
 			else
 			{
-				movieLayers = 4;
 				timesAsk = timesAsk + 1;
 				talkBad();
 			}
@@ -78,7 +77,6 @@ public class WendyMovies implements Chatbot{
 			}
 			else 
 			{
-				movieLayers = 5;
 				talkBadChar();
 			}
 		}
@@ -89,7 +87,7 @@ public class WendyMovies implements Chatbot{
 	private void talkManny(String userInput) {
 		// TODO Auto-generated method stub
 		
-		if(ZhengMain.wordMatch(userInput, bad ))
+		if(ZhengMain.wordMatch(userInput, new String[] {"bad", "sucks", "stinks"}))
 		{	
 			ZhengMain.syso("rude");
 		}
@@ -105,7 +103,7 @@ public class WendyMovies implements Chatbot{
 
 	private void talkSid(String userInput) {
 		// TODO Auto-generated method stub
-		if(ZhengMain.wordMatch(userInput, bad))
+		if(ZhengMain.wordMatch(userInput, new String[] {"bad", "sucks", "stinks"}))
 		{
 			ZhengMain.syso("rude");
 		}
@@ -120,7 +118,7 @@ public class WendyMovies implements Chatbot{
 
 	private void talkDiego(String userInput) {
 		// TODO Auto-generated method stub
-		if(ZhengMain.wordMatch(userInput, bad))
+		if(ZhengMain.wordMatch(userInput, new String[] {"bad", "sucks", "stinks"}))
 		{
 			ZhengMain.syso("rude");
 		}
@@ -134,22 +132,16 @@ public class WendyMovies implements Chatbot{
 
 	private void talkBadChar() {
 		// TODO Auto-generated method stub
-		if(movieLayers == 5)
-		{
-			int num = (int) (Math.random() * badCharacters.length);
-			ZhengMain.syso(badCharacters[num]);
-			ZhengMain.syso("Who's your next favorite?");
-		}
+		int num = (int) (Math.random() * badCharacters.length);
+		ZhengMain.syso(badCharacters[num]);
+		ZhengMain.syso("Who's your next favorite?");
 	}
 
 	private void talkBad() {
 		// TODO Auto-generated method stub
-		if(movieLayers == 4)
-		{
-			int num = (int) (Math.random() * badResponses.length);
-			ZhengMain.syso(badResponses[num]);
-			ZhengMain.syso("What's your number " + timesAsk + " favorite movie?");
-		}
+		int num = (int) (Math.random() * badResponses.length);
+		ZhengMain.syso(badResponses[num]);
+		ZhengMain.syso("What's your number " + timesAsk + " favorite movie?");
 	}
 
 	@Override

@@ -55,22 +55,22 @@ public class ZhengMusic implements Chatbot {
 			else
 			{
 				if(ZhengMain.wordMatch(musicResponse, preferedMusic))
-					ZhengMain.syso("I like that type of music too!");
+					ZhengMain.syso("I love "+ musicResponse +" music too!");
 				else if(ZhengMain.wordMatch(musicResponse, dislikedMusic))
-					ZhengMain.syso("I do not like that type of music...");
+					ZhengMain.syso("I do not like "+ musicResponse +" music. :/");
 				else if(isTriggered(musicResponse))
-		            ZhengMain.syso("interesting taste that you have.");
+					ZhengMain.syso(musicResponse + " is alright.");
 				else
 					ZhengMain.syso("I never heard of " + musicResponse + ".");
 					
-				ZhengMain.syso("Who is your favorite artist or singer?");
+				ZhengMain.syso("Who is your favorite artist or singer that make "+ musicResponse +" music?");
 				musicLayer = 2;
 			}
 		}
 		else if(musicLayer == 1)
 		{
 			if(ZhengMain.wordMatch(musicResponse, preferedMusic))
-				ZhengMain.syso("I love "+ musicResponse +" of music too!");
+				ZhengMain.syso("I love "+ musicResponse +" music too!");
 			else if(ZhengMain.wordMatch(musicResponse, dislikedMusic))
 				ZhengMain.syso("I do not like "+ musicResponse +" music. :/");
             else if(isTriggered(musicResponse))

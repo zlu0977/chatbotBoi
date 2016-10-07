@@ -76,7 +76,10 @@ public class ZhengMain {
 				books.talk();
 			}
 			else
-				syso(getLastResponse()); 
+				if(isQuestion(response) >= 0)
+					syso("Sorry. I do not undertand that question.");
+				else
+					syso(getLastResponse()); 
 		}
 	}
 	
